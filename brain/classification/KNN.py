@@ -2,6 +2,17 @@ import numpy as np
 
 class KNN:
 
+    """
+    P : Parameter for Minkowski Distance.
+        P = 1 for Manhattan Distance
+        P = 2 for Eucledian Distance
+
+        Note : P > 0 and should be an integer
+
+    K : Hyper parameter for # of neighbours
+
+    """
+
     def __init__(self, neighbours=11, p=2):
         self.K = neighbours
         self.P = p
