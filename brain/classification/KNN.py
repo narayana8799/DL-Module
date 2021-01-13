@@ -17,6 +17,7 @@ class KNN:
         self.K = neighbours
         self.P = p
         self.X, self.Y = None, None
+        self.probabilities = []
 
     def fit(self, X, Y):
         self.X = X
@@ -33,5 +34,11 @@ class KNN:
             preds = list(self.Y[preds])
             unq_pts = sorted(np.unique(self.Y))
             predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
+            self.probabilities.append([preds.count(i)/self.K for i in unq_pts])
 
         return predictions
+
+    def get_probs(self):
+
+        self.probabilities = np.array(self.probabilities) * 100
+        return self.probabilities
