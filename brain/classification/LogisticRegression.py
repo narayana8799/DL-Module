@@ -6,7 +6,7 @@ from brain.utils.constants import LR, EPOCHS
 class LogisticRegression:
 
     def __init__(self, learning_rate=LR, epochs=EPOCHS, lambd=0, cost='BinaryCrossEntropy'):
-
+         
         self.lr = learning_rate
         self.epochs = epochs
         self.lambd = lambd
@@ -15,6 +15,10 @@ class LogisticRegression:
         self.X, self.Y = None, None
         self.cost_function = cost
         self.Z, self.A = None, None
+        #addition start
+        self.Costs=[]
+        self.Acc=[]
+        #addition end
 
     def fit(self, X, Y):
         
@@ -42,9 +46,13 @@ class LogisticRegression:
             da = LOSS[self.cost_function].backward(self.Y, self.A)
             self.dW = np.matmul(da, self.X.T)
             self.dB = np.sum(da , axis=1, keepdims=True)
-
             self.W -= self.lr * self.dW
             self.B -= self.lr * self.dB
-
+            #addition start
+            self.Costs.append(LOSS[self.cost_function].forward(self.Y,self.A))
+            prediction=self.predict(self.X)
+            self.Acc.append((np.sum(prediction==self.Y)/self.Y.shape[1])*100)
+    def Vizualize(self):
+        return self.Costs,self.Acc
     def summary(self):
         pass
