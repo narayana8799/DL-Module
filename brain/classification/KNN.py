@@ -31,7 +31,7 @@ class KNN:
             dist = np.power(np.sum(dist, axis=1), 1/self.P)
             preds = np.argsort(dist)[:self.K]
             preds = list(self.Y[preds])
-            unq_pts = sorted(np.unique(preds))
+            unq_pts = sorted(np.unique(self.Y))
             predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
 
         return predictions
