@@ -27,3 +27,6 @@ def plot_cost_acc(cost, accuracy, interactive=False):
     else:
         plt.plot(cost, 'r-', accuracy, 'g-', alpha=0.7)
         plt.legend(['Cost', 'Accuracy'])
+
+
+
