@@ -10,7 +10,6 @@ class KNN:
         Note : P > 0 and should be an integer
 
     K : Hyper parameter for # of neighbours
-
     """
 
     def __init__(self, neighbours=11, p=2, get_probs=False):

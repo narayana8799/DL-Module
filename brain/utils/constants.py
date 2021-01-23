@@ -1,5 +1,3 @@
-from brain.losses import *
-
 EPSILON = 1e-8
 LR = 1e-3
 EPOCHS = 100

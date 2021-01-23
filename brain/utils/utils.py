@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.offline as pof
 import plotly.graph_objs as go
+import os
 
 def OneHotEncode(Y):
 
@@ -19,7 +20,7 @@ def OneHotEncode(Y):
             return Y
 
 
-def plot_cost_acc(cost, accuracy, interactive=False):
+def plot_cost_acc(cost, accuracy, interactive=False, path='./'):
     
     if interactive:
         pass
@@ -28,10 +29,12 @@ def plot_cost_acc(cost, accuracy, interactive=False):
         plt.figure(1)
         plt.plot(cost, 'r-', alpha=0.7, label='Cost')
         plt.legend()
+        plt.savefig(os.path.join(path, 'Cost.png'))
         plt.figure(2)
         plt.plot(accuracy, 'g-', alpha=0.7, label='Accuracy')
         plt.legend()
-        plt.show()
+        plt.savefig(os.path.join(path, 'Accuracy.png'))
+        
 
 
 
