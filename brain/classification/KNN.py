@@ -10,12 +10,12 @@ class KNN:
         Note : P > 0 and should be an integer
 
     K : Hyper parameter for # of neighbours
-
     """
 
-    def __init__(self, neighbours=11, p=2):
+    def __init__(self, neighbours=11, p=2, get_probs=False):
         self.K = neighbours
         self.P = p
+        self.probs = get_probs
         self.X, self.Y = None, None
         self.probabilities = []
 
@@ -26,6 +26,7 @@ class KNN:
     def predict(self, X):
 
         predictions = []
+        self.probabilities = []
         for point in X:
 
             dist = np.power(self.X - point, self.P)
@@ -34,11 +35,10 @@ class KNN:
             preds = list(self.Y[preds])
             unq_pts = sorted(np.unique(self.Y))
             predictions.append(np.argmax([preds.count(i) for i in unq_pts]))
-            self.probabilities.append([preds.count(i)/self.K for i in unq_pts])
-
-        return predictions
+            self.probabilities.append([preds.count(i) / self.K for i in unq_pts])
+            
+        self.probabilities = np.array(self.probabilities) * 100
+        return predictions if not self.probs else self.probabilities
 
     def get_probs(self):
-
-        self.probabilities = np.array(self.probabilities) * 100
         return self.probabilities
